@@ -22,6 +22,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +39,15 @@ public class MainActivity extends Activity implements
 
     private ViewGroup mHeaderView;
 
+    private GoogleProgressBar mProgressBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         expandableListView = (PinnedHeaderExpandableListView) findViewById(R.id.expandablelist);
         stickyLayout = (StickyLayout)findViewById(R.id.sticky_layout);
+        mProgressBar = (GoogleProgressBar) findViewById(R.id.google_progress);
         initData();
 
         adapter = new MyexpandableListAdapter(this);
@@ -121,6 +125,13 @@ public class MainActivity extends Activity implements
     }
 
     public void refreshPeople(View view) {
+        mProgressBar.setIndeterminateDrawable(new FoldingCirclesDrawable.Builder(this).build());
+        if (!mProgressBar.isActivated()){
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+        else {
+            mProgressBar.setVisibility(View.GONE);
+        }
         childList.clear();
         People people = new People();
         ArrayList<People> childTemp = new ArrayList<People>();

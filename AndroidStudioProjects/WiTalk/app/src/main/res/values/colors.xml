@@ -17,5 +17,7 @@
     <color name="background">#e5e5e5</color>
     <color name="transparent_background">#50000000</color>
     <color name="Grey">#BEBEBE</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#01DF01</color>
 
 </resources>
