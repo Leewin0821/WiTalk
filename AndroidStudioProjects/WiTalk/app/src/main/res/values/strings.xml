@@ -2,9 +2,16 @@
 <resources>
 
     <string name="app_name">WiTalk</string>
-    <string name="btn_call">Call</string>
+    <string name="btn_connect">Connect</string>
     <string name="action_settings">Settings</string>
     <string name="p2p_off_warning">Please enable P2P from system settings</string>
     <string name="no_device">No device</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_play">Play</string>
+    <string name="btn_pause">Pause</string>
+    <string name="btn_mode_call">Call</string>
+    <string name="btn_mode_speaker">Speaker</string>
+    <string name="title_activity_audio">AudioActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

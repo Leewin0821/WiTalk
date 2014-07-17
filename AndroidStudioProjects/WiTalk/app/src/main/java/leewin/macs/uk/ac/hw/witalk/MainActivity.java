@@ -3,17 +3,13 @@ package leewin.macs.uk.ac.hw.witalk;
 import java.util.ArrayList;
 import java.util.List;
 
-import leewin.macs.uk.ac.hw.witalk.R;
-import leewin.macs.uk.ac.hw.witalk.PinnedHeaderExpandableListView;
-import leewin.macs.uk.ac.hw.witalk.StickyLayout;
 import leewin.macs.uk.ac.hw.witalk.PinnedHeaderExpandableListView.OnHeaderUpdateListener;
 import leewin.macs.uk.ac.hw.witalk.StickyLayout.OnGiveUpTouchEventListener;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
@@ -368,11 +364,11 @@ public class MainActivity extends Activity implements
                 childHolder.imageView = (ImageView) convertView
                         .findViewById(R.id.image);
                 Button button = (Button) convertView
-                        .findViewById(R.id.button1);
+                        .findViewById(R.id.btn_connect);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MainActivity.this, "Calling...", Toast.LENGTH_SHORT).show();
+                       startActivity(new Intent(MainActivity.this,AudioActivity.class));
                     }
                 });
 

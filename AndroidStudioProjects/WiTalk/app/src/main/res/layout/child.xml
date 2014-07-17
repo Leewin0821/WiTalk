@@ -17,9 +17,10 @@
         android:layout_weight="1" />
     <TextView
         android:id="@+id/deviceStatus"
-        android:layout_width="0dp"
+        android:layout_width="10dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:textColor="@color/white"/>
     <ImageView
         android:id="@+id/image"
         android:layout_width="0dp"
@@ -28,8 +29,8 @@
         android:src="@drawable/collapse"
         android:visibility="gone" />
     <Button
-        android:id="@+id/button1"
-        android:layout_width="10dp"
+        android:id="@+id/btn_connect"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/button"
@@ -37,8 +38,8 @@
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:paddingTop="8dp"
-        android:text="@string/btn_call"
+        android:text="@string/btn_connect"
         android:textColor="@color/white"
-        android:textSize="18sp"/>
+        android:textSize="15sp"/>
 
 </LinearLayout>
