@@ -4,5 +4,7 @@
     <string name="app_name">WiTalk</string>
     <string name="btn_call">Call</string>
     <string name="action_settings">Settings</string>
+    <string name="p2p_off_warning">Please enable P2P from system settings</string>
+    <string name="no_device">No device</string>
 
 </resources>

@@ -9,14 +9,14 @@
     android:padding="5dp" >
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/deviceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:textColor="@color/white"
         android:layout_weight="1" />
     <TextView
-        android:id="@+id/address"
+        android:id="@+id/deviceStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
