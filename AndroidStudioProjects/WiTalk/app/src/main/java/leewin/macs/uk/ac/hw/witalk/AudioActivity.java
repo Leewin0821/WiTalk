@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -35,6 +36,9 @@ public class AudioActivity extends Activity {
     private static String BROADCAST_IP="224.0.0.1";
     private static int BROADCAST_PORT = 8988;
     private InetAddress inetAddress = null;
+//    private Speex speex = new Speex();
+    private byte[] processedData = new byte[1024];
+    private short[] rawdata = new short[1024];
     private String TAG = "AudioActivity";
 
     @Override
@@ -52,12 +56,17 @@ public class AudioActivity extends Activity {
             Log.d(TAG,"IO exception in Audio Activity");
         }
         setVolumeControlStream(AudioManager.MODE_IN_COMMUNICATION);
+        Intent intent = getIntent();
+        String player_name = intent.getStringExtra("player_name");
+        TextView playerNameTextView = (TextView) findViewById(R.id.player_name);
+        playerNameTextView.setText(player_name);
         init();
         recordAndSend();
         receiveAndPlay();
     }
 
     private void init() {
+//        speex.init();
         int min = AudioRecord.getMinBufferSize(8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.VOICE_COMMUNICATION, 8000, AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, min);
@@ -66,6 +75,62 @@ public class AudioActivity extends Activity {
         audioTrack = new AudioTrack(AudioManager.MODE_IN_COMMUNICATION, 8000, AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, maxJitter, AudioTrack.MODE_STREAM);
     }
+
+    /**
+    private void recordAndSend(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                    audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+                    audioRecord.startRecording();
+                    while (isRun){
+                        if (micOn){
+                            int readBytes = 0;
+                            int len;
+                            readBytes = audioRecord.read(rawdata,0,1024);
+                            if (readBytes>0) {
+                                len = speex.encode(rawdata, 0, processedData, 0);
+                                byte[] encData = new byte[len + 1];
+                                DatagramPacket packet = new DatagramPacket(encData,encData.length,inetAddress,BROADCAST_PORT);
+                                multicastSocket.send(packet);
+                                Log.i(TAG,"Start sending packet....");
+                            }
+                        }
+                    }
+                }catch (IOException ioe){
+                    Log.d(TAG,"IO Exception in sending packet.");
+                }
+            }
+        }).start();
+    }
+
+    private void receiveAndPlay(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    byte [] encData = new byte[1024];
+                    short [] decData = new short[256];
+                    audioTrack.play();
+                    while (isRun){
+                        int dec;
+                        DatagramPacket packet = new DatagramPacket(encData,encData.length,inetAddress,BROADCAST_PORT);
+                        multicastSocket.receive(packet);
+                        Log.i(TAG,"Received packet...");
+                        dec = speex.decode(encData, decData, encData.length);
+                        if (dec > 0) {
+                            audioTrack.write(decData, 0, dec);
+                        }
+                    }
+                }catch (IOException ioe){
+                    Log.d(TAG,"IO Exception in receiving packet.");
+                }
+            }
+        }).start();
+    }
+     **/
 
     private void recordAndSend(){
         new Thread(new Runnable() {

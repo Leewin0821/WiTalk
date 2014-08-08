@@ -353,6 +353,8 @@ public class MainActivity extends Activity implements
         public View getChildView(int groupPosition, int childPosition,
                                  boolean isLastChild, View convertView, ViewGroup parent) {
             ChildHolder childHolder = null;
+            final String player_name = ((WifiP2pDevice) getChild(groupPosition,
+                    childPosition)).deviceName;
             if (convertView == null) {
                 childHolder = new ChildHolder();
                 convertView = inflater.inflate(R.layout.child, null);
@@ -368,7 +370,9 @@ public class MainActivity extends Activity implements
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       startActivity(new Intent(MainActivity.this,AudioActivity.class));
+                        Intent intent = new Intent(MainActivity.this,AudioActivity.class);
+                        intent.putExtra("player_name", player_name);
+                        startActivity(intent);
                     }
                 });
 
